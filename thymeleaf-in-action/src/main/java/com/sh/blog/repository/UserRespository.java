@@ -2,6 +2,8 @@ package com.sh.blog.repository;
 
 import com.sh.blog.domain.User;
 
+import java.util.List;
+
 /**
  * @author 麦客子
  * @ UserRespository接口
@@ -16,4 +18,23 @@ public interface UserRespository {
      * @return
      */
     User saveOrUpdate(User user);
+
+    /**
+     * 删除用户
+     * @param id
+     */
+    void deleteUser(Long id);
+
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
+    User getUserById(Long id);
+
+    /**
+     * 获取用户列表
+     * @return
+     */
+    List<User> listUser();
 }
