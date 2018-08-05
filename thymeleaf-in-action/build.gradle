@@ -1,0 +1,44 @@
+// buildscript代码块脚本优先执行
+buildscript {
+	// ext用于定义动态属性
+	ext {
+		springBootVersion = '1.5.16.BUILD-SNAPSHOT'
+	}
+	
+	// 自定义Thymeleaf和Thymeleaf Layout Dialect的版本
+	ext['thymeleaf.version']='3.0.3.RELEASE'
+	ext['thymeleaf-layout-dialect.version']='2.2.0'
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.sh'
+version = '0.0.1-SNAPSHOT'
+// 指定编译.java文件的JDK版本
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+	// 该依赖对于发行是必须的
+	compile('org.springframework.boot:spring-boot-starter-web')
+	// 添加Thymeleaf的依赖
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	// 该依赖对于编译测试时必须的，默认包含编译产品依赖和编译时依赖
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
